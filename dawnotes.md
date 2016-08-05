@@ -33,6 +33,7 @@ such that generative view --> fit pop vars and subject vars
         - but: it cancels out - exactly right variance for group level tests
       - works well for linear regression
       - work poorly for fitting rl models to behavior
+
 ####### "expectation maximization"
       - alternative estimating group parameters from individual parameters
       - Quentin Huys 2012 derive the rule (WITH CODE)
@@ -42,13 +43,16 @@ such that generative view --> fit pop vars and subject vars
       - nathaniel has julia code doing this
 
 ###### Markov Chain Monte Carlo
+
       - procedure for drawing (correlated) samples for arbitrary model
       - generic packages (Stan, JAGS, BUGS) with fontends for Matlab/Python
       - very general, good scaling
       - gold standard for parameter estimation, tricky for model comparison
       - very different feel from ML, can be finicky, requires monitoring
 
+
 ########## MCMC details
+
       - super easy to produce simulated data given parameters
       - also easy to produce simulated params from data
 
@@ -69,4 +73,44 @@ such that generative view --> fit pop vars and subject vars
 
         - confidence intervals from quantiles of samples
         - sample mean gets closer to true sample mean with more data, but varince stays
-        - can also compute samples (and average to obtain expectation) of arbitrary functions of parameters (eg prediction error timeseries for fMRI)
+        - can also compute samples (and average to obtain expectation) of arbitrary functions of parameters (eg prediction error timeseries [for each set of parameters, so that you can marginalize across generative prediction errors] for fMRI or neural)
+
+
+
+########### hierarchy is now trivial
+
+e.g. def model:
+
+        betaM ~ normal(0,10)..
+        betaS ~ normal(0,10)..
+        alphaM ~ normal(0,1)..
+        alphaS ~ normal(0,1)..
+
+          for s in range(0, NS):
+            beta[s] = normal(betaM, betaS)
+            alpha inv[s] = normal(al
+            alpha[s] <- phi approx(alpha_inv[s]); // sigmoid
+
+            for t in range(0, NT):
+              ...
+
+
+########### pragmatics for Stan & MCMC
+
+        - convergence
+          - burn in (need to throw out first samples, before convergence)
+          - autocorrlation, thinning
+          - compare multiple chains, r-hat statistic
+          - hairy caterpillar test?!?
+
+        - stan is a big improvement over predecessors
+          - last problem: doesn't directly support discrete-valued latent variables (e.g. mixture models); workarounds are laborious
+          - BUGS is clumsy, pyMC is appalling, don't roll your own
+            (avoid block Metropolis)
+        - model comparison is now hard -
+        - interdependent parameters make parameter #s hard,
+         so BIC for just top params??
+
+        - deep interest (among reviewers) in how evidence for models vary across subjects  -- tricky when you fit simultaneously, b.c. not interdependent
+        - alt: compute leave-one-out marginal likelihoods for each subject
+          - compare with paired t-tests or submit to SPM_BMS

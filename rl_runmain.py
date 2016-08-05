@@ -25,23 +25,23 @@ rat_num, sess_num, events, data = rl_import.rl_load()
 ###### NOW, WE MODEL THE DATA #############################
 
 n_sessions = rat_num.size
-alpha_beta = np.zeros((n_sessions,2))
+alpha_beta = np.zeros((n_sessions,3))
 label = np.zeros((n_sessions,2))
 
 n_iter=5
-temp_alpha_beta = np.zeros((n_iter,2))
+temp_alpha_beta = np.zeros((n_iter,3))
 
 
 for ss in range(0,n_sessions):
     for ii in range(0,n_iter):
         alpha = np.random.random()
-        beta = 5*np.random.random()
-        gamma = 4
+        beta = 2*np.random.random()
+        gamma = 2*np.random.random()
 
-        x0 = np.array([alpha, beta])
+        x0 = np.array([alpha, beta, gamma])
         session = ss
 
-        opti_result = opti.minimize(rl_models.stoopid_mf_rats,x0,args=(gamma, data, session))
+        opti_result = opti.minimize(rl_models.stoopid_mf_rats,x0,args=(data, session))
         temp_alpha_beta [ii,:] = opti_result["x"]
 
     alpha_beta[ss,:]=np.median(temp_alpha_beta,0)
