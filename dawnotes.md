@@ -1,4 +1,4 @@
-# how many samples do we have? mixture models to solve our problems
+# how many samples do we have? MCMC models to solve our problems
 
 for fmri problem -- got 15 samples per subj and 10 subj
 do I have 150 samples, or 15? major issue -- single subjects can drive effects
