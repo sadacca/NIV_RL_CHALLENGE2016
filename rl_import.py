@@ -1,5 +1,5 @@
 #
-def function rl_load()
+def rl_load()
     ######### STARTING and I/O ########################
     ## you're going to need some functions. import them.
     import scipy.io as io
