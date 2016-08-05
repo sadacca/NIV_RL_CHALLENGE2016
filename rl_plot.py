@@ -19,7 +19,7 @@ TOOLS="crosshair,pan,wheel_zoom,box_zoom,undo,redo,reset,tap,save,box_select,pol
 
 p = figure(tools=TOOLS)
 
-p = figure(title = "fit values across animals and sessions for states = odorXwell")
+p = figure(title = "fit values across animals and sessions for states = wells")
 
 p.scatter(x, y, radius=radii,
           fill_color=colors, fill_alpha=0.6,
@@ -33,6 +33,6 @@ p.background_fill_color= "#777777"
 p.xaxis.axis_label = "beta value"
 p.yaxis.axis_label = "alpha value"
 
-output_file("alpha_beta_by_animal_simpleRL.html", title="color_scatter.py example")
+output_file("alpha_beta_by_animal_6stateRL.html", title="color_scatter.py example")
 
 show(p)  # open a browser
