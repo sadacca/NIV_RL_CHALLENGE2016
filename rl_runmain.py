@@ -41,7 +41,7 @@ for ss in range(0,n_sessions):
         x0 = np.array([alpha, beta, gamma])
         session = ss
 
-        opti_result = opti.minimize(rl_models.stoopid_mf_rats,x0,args=(data, session))
+        opti_result = opti.minimize(rl_models.multi_well_update_mf_rats,x0,args=(data, session))
         temp_alpha_beta [ii,:] = opti_result["x"]
 
     alpha_beta[ss,:]=np.median(temp_alpha_beta,0)
@@ -52,5 +52,5 @@ for ss in range(0,n_sessions):
     label[:,0] = rat_num
     label[:,1] = sess_num
 
-np.save('all_sess_alpha_S',alpha_beta)
+np.save('all_sess_alpha_S_MW',alpha_beta)
 np.save('all_sess_label',label)
