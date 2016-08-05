@@ -80,7 +80,7 @@ def rl_function(x0, gamma, data, session):
 
 
 
-########### make the main RL function ##########
+########### make another RL function ##########
 
 def stoopid_mf_rats(x0, gamma, data, session):
     import numpy as np

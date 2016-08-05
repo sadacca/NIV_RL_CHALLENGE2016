@@ -13,7 +13,7 @@ def progress(count, total, suffix=''):
     filled_len = int(round(bar_len * count / float(total)))
 
     percents = round(100.0 * count / float(total), 1)
-    bar = '=' * filled_len + '-' * (bar_len - filled_len)
+    bar = '|' * filled_len + '-' * (bar_len - filled_len)
 
     sys.stdout.write('[%s] %s%s ...%s\r' % (bar, percents, '%', suffix))
     sys.stdout.flush()  # As suggested by Rom Ruben
@@ -41,7 +41,7 @@ for ss in range(0,n_sessions):
         x0 = np.array([alpha, beta])
         session = ss
 
-        opti_result = opti.minimize(rl_models.rl_function,x0,args=(gamma, data, session))
+        opti_result = opti.minimize(rl_models.stoopid_mf_rats,x0,args=(gamma, data, session))
         temp_alpha_beta [ii,:] = opti_result["x"]
 
     alpha_beta[ss,:]=np.median(temp_alpha_beta,0)
@@ -52,5 +52,5 @@ for ss in range(0,n_sessions):
     label[:,0] = rat_num
     label[:,1] = sess_num
 
-np.save('all_sess_alpha',alpha_beta)
+np.save('all_sess_alpha_S',alpha_beta)
 np.save('all_sess_label',label)
