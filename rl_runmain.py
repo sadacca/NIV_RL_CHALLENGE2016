@@ -32,7 +32,7 @@ for ss in range(0,n_sessions):
     #log_lik = rl_function(alpha, beta, gamma, data)
     print(ii/n_sessions)
 
-print(alpha_beta)
+np.save('all_sess_alpha',alpha_beta)
 
 ## put alphas and betas into a datafram for pretty plots
 fit_data = pd.DataFrame(alpha_beta, columns = ['alpha', 'beta'])

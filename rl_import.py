@@ -21,5 +21,6 @@ def rl_load()
     sesnum = inbound_data["train_sessionnumber"]
     events = inbound_data["events"]
     data = inbound_data["train_behavior"]
+    os.chdir("C:\\users\\sadaccabf\\NIVCH16")
 
     return ratnum, sesnum, events, data
