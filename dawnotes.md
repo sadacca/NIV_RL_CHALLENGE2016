@@ -21,12 +21,12 @@ such that generative view --> fit pop vars and subject vars
 
 ## 4 approaches (being careful can shrink your error-bars!)
 
-###### off the shelf software (unlikely)
+##### off the shelf software (unlikely)
       - for certain model classes (GLMs, but not RL)
       - linear effects (faculty rating students - which students are best?)
         - can test for bias of females / URM, and can correct fixed effects
 
-###### Summary statistics approach (Holmes and Friston)
+##### Summary statistics approach (Holmes and Friston)
       - do low (subject) generative model -- and then estimate pop mean&var
       - alas -- throwing away uncertainty of low level MLE estimates
         - so have both pop variance AND estimation variance
@@ -34,7 +34,7 @@ such that generative view --> fit pop vars and subject vars
       - works well for linear regression
       - work poorly for fitting rl models to behavior
 
-####### "expectation maximization"
+##### "expectation maximization"
       - alternative estimating group parameters from individual parameters
       - Quentin Huys 2012 derive the rule (WITH CODE)
       - good get estimates of individual and groups, bad clunky and approx
@@ -42,7 +42,7 @@ such that generative view --> fit pop vars and subject vars
         - error is reduced becaues estimates are dependent
       - nathaniel has julia code doing this
 
-###### Markov Chain Monte Carlo
+##### Markov Chain Monte Carlo
 
       - procedure for drawing (correlated) samples for arbitrary model
       - generic packages (Stan, JAGS, BUGS) with fontends for Matlab/Python
@@ -51,7 +51,7 @@ such that generative view --> fit pop vars and subject vars
       - very different feel from ML, can be finicky, requires monitoring
 
 
-########## MCMC details
+###### MCMC details
 
       - super easy to produce simulated data given parameters
       - also easy to produce simulated params from data
@@ -77,7 +77,7 @@ such that generative view --> fit pop vars and subject vars
 
 
 
-########### hierarchy is now trivial
+###### hierarchy is now trivial
 
 e.g. def model:
 
@@ -95,7 +95,7 @@ e.g. def model:
               ...
 
 
-########### pragmatics for Stan & MCMC
+###### pragmatics for Stan & MCMC
 
         - convergence
           - burn in (need to throw out first samples, before convergence)
