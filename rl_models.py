@@ -286,6 +286,7 @@ def rl_multi_well_update_function(x0, data, session):
             ## OK. what state are we in?  well? wellXodor? wellxblock?
             this_state = np.int16((odor[tt]-1)*2 + choice[tt]-1)
             poss_states = np.int16((odor[tt]-1)*2 + np.array([1, 2])-1)
+            other_state = np.int16(np.setdiff1d(poss_states,this_state))
 
             log_lik[tt]= beta*q_trial[this_state] - smc.logsumexp(beta*q_trial[poss_states])
 
@@ -304,6 +305,7 @@ def rl_multi_well_update_function(x0, data, session):
 
             pred_error[tt] = observation - expectation
             q_trial[this_state] = q_trial[this_state] + alpha*pred_error[tt]
+            q_trial[other_state] = q_trial[other_state] - alpha*pred_error[tt]
 
         else:
             pass #q_trial[this_state]
