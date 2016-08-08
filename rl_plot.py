@@ -3,7 +3,7 @@ from bokeh.plotting import figure, show, output_file
 from bokeh.models import Range1d
 
 
-alpha_beta = np.load('all_sess_alpha_S_MW.npy')
+alpha_beta = np.load('all_sess_alpha_MW.npy')
 label = np.load('all_sess_label.npy')
 
 N = label.size

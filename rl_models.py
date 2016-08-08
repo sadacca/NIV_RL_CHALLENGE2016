@@ -2,7 +2,7 @@
 
 ########### make the main RL function ##########
 
-def rl_function(x0, data, session):
+def rl_function(x0, data, session, flag):
     import numpy as np
     import scipy.misc as smc
 
@@ -74,7 +74,10 @@ def rl_function(x0, data, session):
 
     log_lik = -np.nansum(log_lik)
 
-    return log_lik
+    if flag:
+        return log_lik, pred_error
+    else:
+        return log_lik
 
 #==========================================================
 
@@ -83,7 +86,7 @@ def rl_function(x0, data, session):
 
 ########### make another RL function ##########
 
-def stoopid_mf_rats(x0, data, session):
+def stoopid_mf_rats(x0, data, session, flag):
     import numpy as np
     import scipy.misc as smc
 
@@ -155,12 +158,15 @@ def stoopid_mf_rats(x0, data, session):
 
     log_lik = -np.nansum(log_lik)
 
-    return log_lik
+    if flag:
+        return log_lik, pred_error
+    else:
+        return log_lik
 
 #==========================================================
 
 
-def multi_well_update_mf_rats(x0, data, session):
+def multi_well_update_mf_rats(x0, data, session, flag):
     import numpy as np
     import scipy.misc as smc
 
@@ -234,12 +240,15 @@ def multi_well_update_mf_rats(x0, data, session):
 
     log_lik = -np.nansum(log_lik)
 
-    return log_lik
+    if flag:
+        return log_lik, pred_error
+    else:
+        return log_lik
 
 #==========================================================
 
 
-def rl_multi_well_update_function(x0, data, session):
+def rl_multi_well_update_function(x0, data, session, flag):
     import numpy as np
     import scipy.misc as smc
 
@@ -313,6 +322,9 @@ def rl_multi_well_update_function(x0, data, session):
 
     log_lik = -np.nansum(log_lik)
 
-    return log_lik
+    if flag:
+        return log_lik, pred_error
+    else:
+        return log_lik
 
 #==========================================================
