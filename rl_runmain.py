@@ -59,4 +59,4 @@ for ss in range(0,n_sessions):
     label[:,1] = sess_num
 
 
-np.savez('all_sess_model1_RL', alpha_beta, log_lik, perror, label)
+np.savez('all_sess_model1_RL', (alpha_beta, log_lik, perror, label))

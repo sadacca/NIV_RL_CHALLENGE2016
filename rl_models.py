@@ -7,6 +7,12 @@ def rl_function(x0, data, session, flag):
     import scipy.misc as smc
 
 
+
+    def softmax(x,beta):
+
+        """Compute softmax values for each sets of scores in x."""
+        return np.exp(x*beta) / np.sum(np.exp(x*beta), axis=0)
+
     alpha = x0[0]
     beta  = x0[1]
     gamma = x0[2]
@@ -50,7 +56,9 @@ def rl_function(x0, data, session, flag):
             this_state = np.int16((odor[tt]-1)*2 + choice[tt]-1)
             poss_states = np.int16((odor[tt]-1)*2 + np.array([1, 2])-1)
 
-            log_lik[tt]= beta*q_trial[this_state] - smc.logsumexp(beta*q_trial[poss_states])
+            q_all_states_SM = softmax(q_trial[poss_states],beta)
+            this_new_state = this_state-np.min(poss_states)
+            log_lik[tt] = q_all_states_SM[this_new_state]
 
             ## if we're in a unsuccessful trial don't update
             ## otherwise, update.
@@ -91,6 +99,13 @@ def stoopid_mf_rats(x0, data, session, flag):
     import scipy.misc as smc
 
 
+
+    def softmax(x,beta):
+
+        """Compute softmax values for each sets of scores in x."""
+        return np.exp(x*beta) / np.sum(np.exp(x*beta), axis=0)
+
+
     alpha = x0[0]
     beta  = x0[1]
     gamma = x0[2]
@@ -134,8 +149,9 @@ def stoopid_mf_rats(x0, data, session, flag):
             this_state = np.int16(choice[tt]-1)
             poss_states = np.int16(np.array([1, 2])-1)
 
-            log_lik[tt]= beta*q_trial[this_state] - smc.logsumexp(beta*q_trial[poss_states])
-
+            q_all_states_SM = softmax(q_trial[poss_states],beta)
+            this_new_state = this_state-np.min(poss_states)
+            log_lik[tt] = q_all_states_SM[this_new_state]
             ## if we're in a unsuccessful trial don't update
             ## otherwise, update.
             if np.isnan(rew_code[tt]+rew_tim[tt]+rew_num[tt]):
@@ -169,6 +185,13 @@ def stoopid_mf_rats(x0, data, session, flag):
 def multi_well_update_mf_rats(x0, data, session, flag):
     import numpy as np
     import scipy.misc as smc
+
+
+
+    def softmax(x,beta):
+
+        """Compute softmax values for each sets of scores in x."""
+        return np.exp(x*beta) / np.sum(np.exp(x*beta), axis=0)
 
 
     alpha = x0[0]
@@ -215,8 +238,9 @@ def multi_well_update_mf_rats(x0, data, session, flag):
             poss_states = np.int16(np.array([1, 2])-1)
             other_state = np.int16(np.setdiff1d(poss_states,this_state))
 
-            log_lik[tt] = beta*q_trial[this_state] - smc.logsumexp(beta*q_trial[poss_states])
-
+            q_all_states_SM = softmax(q_trial[poss_states],beta)
+            this_new_state = this_state-np.min(poss_states)
+            log_lik[tt] = q_all_states_SM[this_new_state]
             ## if we're in a unsuccessful trial don't update
             ## otherwise, update.
             if np.isnan(rew_code[tt]+rew_tim[tt]+rew_num[tt]):
@@ -251,6 +275,12 @@ def multi_well_update_mf_rats(x0, data, session, flag):
 def rl_multi_well_update_function(x0, data, session, flag):
     import numpy as np
     import scipy.misc as smc
+
+
+
+    def softmax(x,beta):
+        """Compute softmax values for each sets of scores in x."""
+        return np.exp(x*beta) / np.sum(np.exp(x*beta), axis=0)
 
 
     alpha = x0[0]
@@ -297,7 +327,9 @@ def rl_multi_well_update_function(x0, data, session, flag):
             poss_states = np.int16((odor[tt]-1)*2 + np.array([1, 2])-1)
             other_state = np.int16(np.setdiff1d(poss_states,this_state))
 
-            log_lik[tt]= beta*q_trial[this_state] - smc.logsumexp(beta*q_trial[poss_states])
+            q_all_states_SM = softmax(q_trial[poss_states],beta)
+            this_new_state = this_state-np.min(poss_states)
+            log_lik[tt] = q_all_states_SM[this_new_state]
 
             ## if we're in a unsuccessful trial don't update
             ## otherwise, update.
