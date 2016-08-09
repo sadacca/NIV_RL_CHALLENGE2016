@@ -172,7 +172,7 @@ def stoopid_mf_rats(x0, data, session, flag):
             pass #q_trial[this_state]
 
 
-    log_lik = -np.nansum(log_lik)
+    #log_lik = -np.nansum(log_lik)
 
     if flag:
         return log_lik, pred_error

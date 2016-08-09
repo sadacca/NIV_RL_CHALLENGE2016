@@ -39,17 +39,19 @@ for ss in range(0,n_sessions):
         beta = 2*np.random.random()
         gamma = 2*np.random.random()
 
+#multi_well_update_mf_rats
+#stoopid_mf_rats
 
         x0 = np.array([alpha, beta, gamma])
         session = ss
         flag = False
-        opti_result = opti.minimize(rl_models.rl_multi_well_update_function,x0,args=(data, session, flag))
+        opti_result = opti.minimize(rl_models.stoopid_mf_rats,x0,args=(data, session, flag))
         temp_alpha_beta [ii,:] = opti_result["x"]
 
     alpha_beta[ss,:]=np.median(temp_alpha_beta,0)
     flag = True
 
-    log_lik[ss,:], pe = rl_models.rl_multi_well_update_function(np.squeeze(alpha_beta[ss,:]), data, session, flag)
+    log_lik[ss,:], pe = rl_models.stoopid_mf_rats(np.squeeze(alpha_beta[ss,:]), data, session, flag)
     perror = {str(ss): pe}
     #log_lik = rl_function(alpha, beta, gamma, data)
 
@@ -59,4 +61,4 @@ for ss in range(0,n_sessions):
     label[:,1] = sess_num
 
 
-np.savez('all_sess_model1_RL', (alpha_beta, log_lik, perror, label))
+np.savez('all_sess_model3_RL', (alpha_beta, log_lik, perror, label))

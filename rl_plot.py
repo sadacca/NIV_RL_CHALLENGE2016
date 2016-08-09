@@ -3,12 +3,13 @@ from bokeh.plotting import figure, show, output_file
 from bokeh.models import Range1d
 
 
-alpha_beta = np.load('all_sess_alpha_MW.npy')
-label = np.load('all_sess_label.npy')
+input_data = np.load('all_sess_model1_rl.npz')
 
-N = label.size
-x = alpha_beta[:,1]
-y = alpha_beta[:,0]
+#label = np.load('all_sess_label.npy')
+
+N = 69
+x = input_data['arr_0'][0][:,1]
+y = input_data['arr_0'][0][:,1]
 
 radii = .6 #np.random.random(size=N) * 1.5
 
