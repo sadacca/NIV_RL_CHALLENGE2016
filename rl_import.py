@@ -30,7 +30,6 @@ def rl__test_load():
     import scipy.io as io
     from tkinter import filedialog
     from tkinter.filedialog import askopenfilename
-    from tkinter.messagebox import showerror
 
     filename = filedialog.askopenfilename(filetypes = (("Matlab Files", "*.mat"),("All files", "*.*") ))
 

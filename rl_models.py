@@ -96,7 +96,7 @@ def rl_function(x0, data, session, flag):
 
 def stoopid_mf_rats(x0, data, session, flag):
     import numpy as np
-    import scipy.misc as smc
+
 
 
 
@@ -184,7 +184,6 @@ def stoopid_mf_rats(x0, data, session, flag):
 
 def multi_well_update_mf_rats(x0, data, session, flag):
     import numpy as np
-    import scipy.misc as smc
 
 
 
